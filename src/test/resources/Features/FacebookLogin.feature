@@ -27,8 +27,8 @@ Feature: Facebook Login functionality
     Then I should see "<error>" message
 
     Examples:
-      | loginId                  | password  | error                                                          |
-      | sanjay.qa101@gmail.com   | Test@123  | The email address you entered isn't connected to an account.   |
+      | loginId      | password  | error                                                          |
+      | 8240855700   | Test@123  | The email address you entered isn't connected to an account.   |
 
   # 2. Scenario - Invalid Email + Invalid Password
   Scenario: Login with invalid email and password
@@ -47,6 +47,6 @@ Feature: Facebook Login functionality
   # 4. Scenario - Valid Email + Valid Password
   Scenario: Login with valid email and password
     Given I am on the Facebook login page
-    When I enter "6378378315" and "Welcome@123"
+    When I enter "8240855700" and "Test@12345"
     And Hit the Login button
-    Then I should be redirected to the home page
+    Then I should bgite redirected to the home page
