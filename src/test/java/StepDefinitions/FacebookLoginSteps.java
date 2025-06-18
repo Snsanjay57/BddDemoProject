@@ -2,14 +2,22 @@ package StepDefinitions;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.testng.Assert;
+
+import Pages.FacebookHomeDashboardPage;
 import Pages.FacebookLoginPage;
-import io.cucumber.java.*;
-import io.cucumber.java.en.*;
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Scenario;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import utils.BaseTest;
 
 public class FacebookLoginSteps {
 
     private FacebookLoginPage fbLogin;
+    private FacebookHomeDashboardPage fbHome;
 
     /* ---------- GIVEN ---------- */
     @Given("I am on the Facebook login page")
@@ -53,8 +61,22 @@ public class FacebookLoginSteps {
 
     /* ---------- THEN #3 – success path ---------- */
     @Then("I should be redirected to the home page")
-    public void i_should_be_redirected_to_the_home_page() {
+    public void i_should_be_redirected_to_the_home_page() throws InterruptedException {
         // simplest sanity check: URL contains facebook.com and NOT /login
+    	Thread.sleep(3000); // wait for the page to load
+    	fbHome.profileNameOnPopup.isDisplayed();
+    	System.out.println("Profile name on popup: " + fbHome.profileNameOnPopup.getText());
+    	Thread.sleep(2000); // wait for the page to load
+
+    	fbHome.closePopup.click();
+    	
+    	Thread.sleep(2000);
+    	
+    	// Validate the user name on dashboard screen.
+		Assert.assertEquals(fbHome.userNameOnDashboard.getText(), "Bewizor QA",
+				"Profile name on Home dashboard does NOT match expected value.");
+    	
+    	
         boolean onHome = BaseTest.driver.getCurrentUrl().startsWith("https://www.facebook.com/")
                       && !BaseTest.driver.getCurrentUrl().contains("login");
         assert onHome : "User was NOT redirected to the Facebook home page.";
@@ -70,3 +92,4 @@ public class FacebookLoginSteps {
         }
     }
 }
+//div[text()='Bewizor QA']

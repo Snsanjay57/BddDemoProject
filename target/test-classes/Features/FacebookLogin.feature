@@ -16,19 +16,18 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
-
 Feature: Facebook Login functionality
 
-# 1. Scenario Outline with Examples
+  # 1. Scenario Outline with Examples
   Scenario Outline: Login with invalid email and password
     Given I am on the Facebook login page
     When I enter login Id: "<loginId>" and password: "<password>"
     And Hit the Login button
     Then I should see "<error>" message
 
-    Examples:
-      | loginId      | password  | error                                                          |
-      | 8240855700   | Test@12  | The email address you entered isn't connected to an account.   |
+    Examples: 
+      | loginId    | password | error                                                        |
+      | 8240855700 | Test@12  | The email address you entered isn't connected to an account. |
 
   # 2. Scenario - Invalid Email + Invalid Password
   Scenario: Login with invalid email and password
@@ -49,4 +48,18 @@ Feature: Facebook Login functionality
     Given I am on the Facebook login page
     When I enter "8240855700" and "Test@12345"
     And Hit the Login button
-    Then I should bgite redirected to the home page
+    Then I should be redirected to the home page
+
+  # 5. Scenario - Validate the Home Dashboard screen with user name.
+  Scenario: Validate the Home Dashboard screen with user name.
+    Given I am on the Home Dashboard page
+    When I enter "8240855700" and "Test@12345"
+    And Hit the Login button
+    Then I should be redirected to the home page
+
+      # 5. Scenario - Search user name.
+  Scenario: Search user name.
+    Given I am on the Home Dashboard page
+    When Enter the username: <Sanjay Meena> on Search field
+    And click the searched data
+    Then I should be redirected to the user: <Sanjay Meena> profile screen.
