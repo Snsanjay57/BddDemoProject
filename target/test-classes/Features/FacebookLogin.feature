@@ -28,7 +28,7 @@ Feature: Facebook Login functionality
 
     Examples:
       | loginId      | password  | error                                                          |
-      | 8240855700   | Test@123  | The email address you entered isn't connected to an account.   |
+      | 8240855700   | Test@12  | The email address you entered isn't connected to an account.   |
 
   # 2. Scenario - Invalid Email + Invalid Password
   Scenario: Login with invalid email and password
